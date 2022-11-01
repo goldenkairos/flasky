@@ -12,9 +12,18 @@ breakfast_bp = Blueprint("breakfast", __name__, url_prefix="/breakfast")
 def get_all_breakfasts():
     #turning the list of breakfast_item and convert it to json
     #import jsonify 
+    
+    rating_query_value = request.args.get("rating") #has to be a string to be passed in
+    if rating_query_value is not None:
+    
+        breakfasts = Breakfast.query.filter_by(rating=rating_query_value)
+    
+    else:
+        breakfasts = Breakfast.query.all()    
+    
     result = []
-    all_breakfasts = Breakfast.query.all()
-    for item in all_breakfasts:
+    
+    for item in breakfasts:
         # item_dict = {"id" : item.id, "name": item.name, "rating": item. rating, "prep time": item.prep_time}
         result.append(item.to_dict())
         
