@@ -4,22 +4,6 @@ from app import db
 from app.models.breakfast import Breakfast
 
 
-'''
-class Breakfast():
-    def __init__(self, id, name, rating, prep_time):
-        self.id = id
-        self.name = name
-        self.rating = rating
-        self.prep_time = prep_time
-
-breakfast_items = [
-    Breakfast(1, "omelette", 4, 10),
-    Breakfast(2, "french toast", 3, 15),
-    Breakfast(3, "cereal", 1, 1),
-    Breakfast(4, "oatmeal", 3, 5)
-]
-'''
-
 
 breakfast_bp = Blueprint("breakfast", __name__, url_prefix="/breakfast")
 
@@ -41,12 +25,6 @@ def get_all_breakfasts():
 @breakfast_bp.route('/<breakfast_id>',methods=['GET']) #this is called decorator
 #breakfast_item is a global variable so we don't need to pass it in the function
 def get_one_breakfasts(breakfast_id): #pass the parameter for whatever we called in the ' ' in the decorator
-    # try:
-    #     breakfast_id = int(breakfast_id)
-    # except ValueError: #ValueError (where we receive a string instead of an int)
-    #     return jsonify({"message":f"in valid data type {breakfast_id} invalid"}), 400        
-    
-    # chosen_breakfast = Breakfast.query.get(breakfast_id)
     chosen_breakfast = get_breakfast_from_id(breakfast_id)
 
     # if chosen_breakfast is None:
@@ -97,7 +75,7 @@ def delete_one_breakfast(breakfast_id):
     db.session.delete(breakfast_to_delete)
     db.session.commit()
     
-    return jsonify({"msg":f"Successfully delete breakfast with id {breakfast_to_delete.id} {breakfast_to_delete.name}"}, 200)
+    return jsonify({"msg":f"Successfully delete breakfast with id {breakfast_to_delete.id} {breakfast_to_delete.name}"}), 200
     
        
 def get_breakfast_from_id(breakfast_id):
