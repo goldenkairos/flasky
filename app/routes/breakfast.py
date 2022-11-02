@@ -56,7 +56,7 @@ def create_one_breakfast():
     #tell databse to commit everything
     db.session.commit()
     
-    return jsonify({'message': f"Successfully created Breakfast with id={new_breakfast.id}"}),201
+    return jsonify({'message': f"Successfully created Breakfast with id = {new_breakfast.id}"}),201
 
 @breakfast_bp.route('/<breakfast_id>', methods=['PUT'])
 def update_breakfast(breakfast_id):

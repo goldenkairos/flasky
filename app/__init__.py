@@ -22,7 +22,7 @@ def create_app(testing = None):
     if testing is None: #if we don't do test, then we will pull data from normal database
         app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('SQLALCHEMY_DATABASE_URI')
     else: #if we test, then we will pull data from the testing database that we named in .env file
-        app.config['TESTING'] = True
+        app.config['TESTING'] = True #this is a flag that we create optionally. 
         app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('TEST_SQLALCHEMY_DATABASE_URI')
         
     db.init_app(app) #connecting database
