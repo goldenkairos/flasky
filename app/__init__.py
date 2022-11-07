@@ -29,7 +29,10 @@ def create_app(testing = None):
     migrate.init_app(app,db) #migration in our database
     
     from app.models.breakfast import Breakfast #importing model Breakfast into our project. This line of code can be anywhere
+    from app.models.menu import Menu #this is done right after creating model
     
-    from .routes.breakfast import breakfast_bp
+    
+    from .routes.breakfast import breakfast_bp #this is done when we create end points\q
+    
     app.register_blueprint(breakfast_bp)
     return app
